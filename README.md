@@ -9,7 +9,7 @@ Dockerに関するシェルスクリプトが`docker/`フォルダにまとめ�
 拡張子が`.sh`のファイルを実行すれば簡単にDockerを利用できます．
 
 - `./docker/build.sh`: DockerfileからDockerイメージを作ります． Dockerイメージの名前は`PyTorchLightningHydra`です．
-- `./docker/run.sh`: Dockerイメージ`PyTorchLightningHydra`のコンテナを作ります． コンテナの名前は`pytorch_lightning_hydra`です．このシェルスクリプトを実行したディレクトリとパス`$DATASET`が示すディレクトリがそれぞれコンテナ内の`/workspace/`と`/dataset/`に**マウントされ，完全に同期されます**．また，5000,6006,8888のポートをホストに割り当てます．環境変数を`.env`ファイルから読み込むので作って下さい．
+- `./docker/run.sh`: Dockerイメージ`PyTorchLightningHydra`のコンテナを作ります． コンテナの名前は`pytorch_lightning_hydra`です．このシェルスクリプトを実行したディレクトリとパス`$DATASET`が示すディレクトリがそれぞれコンテナ内の`/workspace/`と`/dataset/`に**マウントされ，完全に同期されます**．また，5000,6006,8888のポートをホストに割り当てます．環境変数は`.env`ファイルから読み込みます．
   -  引数: コンテナで常時実行するコマンド．デフォルトはfish
 - `./docker/attach.sh`: `run`で実行したコマンドに復帰します．このコマンドが終了するとコンテナも終了します．
 - `./docker/exec.sh`: 動作中のコンテナで新しいコマンドを実行します．
@@ -20,6 +20,8 @@ Dockerに関するシェルスクリプトが`docker/`フォルダにまとめ�
   -  引数: サーバーのポート．デフォルトは5000
 - `./docker/jupyter.sh`: コンテナ内でjupyter-labを実行します．**非常にセキュアでない**ので実行には注意して下さい．
   -  引数: サーバーのポート．デフォルトは8888
+
+`.env`の作成には`.env.default`を参考にして下さい．
 
 ## PyTorch Lightningによる学習
 
