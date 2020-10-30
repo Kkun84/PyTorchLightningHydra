@@ -1,0 +1,3 @@
+# @package _group_
+path: /dataset/MNIST
+classes: 10

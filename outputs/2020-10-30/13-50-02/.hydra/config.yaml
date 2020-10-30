@@ -1,0 +1,60 @@
+project_name: PyTorchLightningHydra
+experiment_name: Default
+tag: null
+debug: false
+hparams:
+  seed: 0
+  batch_size: 1024
+  num_workers: 6
+  max_epochs: 1000
+  min_epochs: 10
+  patience: 20
+  optimizer: Adam
+  lr: 0
+  image_size: 28
+  hidden_n: 256
+  output_n: ${dataset.classes}
+dataset:
+  path: /dataset/MNIST
+  classes: 10
+trainer:
+  max_epochs: ${hparams.max_epochs}
+  min_epochs: ${hparams.min_epochs}
+  auto_scale_batch_size: false
+  gpus: 1
+  auto_select_gpus: true
+  num_nodes: 1
+  accelerator: null
+  benchmark: true
+  deterministic: true
+  fast_dev_run: ${debug}
+  profiler: simple
+  weights_summary: full
+model_checkpoint:
+  filepath: null
+  monitor: valid_loss
+  verbose: false
+  save_last: null
+  save_top_k: null
+  save_weights_only: false
+  mode: min
+  prefix: ''
+  dirpath: null
+  filename: null
+early_stopping:
+  monitor: valid_loss
+  min_delta: 0
+  patience: ${hparams.patience}
+  verbose: false
+  mode: min
+callbacks: []
+loggers:
+- _target_: pytorch_lightning.loggers.TensorBoardLogger
+  save_dir: .
+  name: ''
+  version: lightning_logs
+- _target_: pytorch_lightning.loggers.MLFlowLogger
+  experiment_name: ${experiment_name}
+  tracking_uri: file:/workspace/mlruns
+  tags: null
+  save_dir: null

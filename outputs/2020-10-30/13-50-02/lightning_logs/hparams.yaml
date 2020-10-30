@@ -1,0 +1,11 @@
+batch_size: 1024
+hidden_n: 256
+image_size: 28
+lr: 0.002754228703338169
+max_epochs: 1000
+min_epochs: 10
+num_workers: 6
+optimizer: Adam
+output_n: 10
+patience: 20
+seed: 0

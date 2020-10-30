@@ -1,0 +1,24 @@
+defaults:
+  - dataset: mnist
+  - trainer: basic
+  - callbacks: basic
+  - loggers: basic
+
+project_name: PyTorchLightningHydra
+experiment_name: Default
+tag:
+
+debug: False
+
+hparams:
+  seed: 0
+  batch_size: 1024
+  num_workers: 6
+  max_epochs: 1000
+  min_epochs: 10
+  patience: 20
+  optimizer: Adam
+  lr: 0
+  image_size: 28
+  hidden_n: 256
+  output_n: ${dataset.classes}

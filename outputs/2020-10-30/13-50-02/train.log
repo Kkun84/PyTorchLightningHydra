@@ -1,0 +1,114 @@
+[2020-10-30 13:50:02,674][__main__][INFO] - 
+project_name: PyTorchLightningHydra
+experiment_name: Default
+tag: null
+debug: false
+hparams:
+  seed: 0
+  batch_size: 1024
+  num_workers: 6
+  max_epochs: 1000
+  min_epochs: 10
+  patience: 20
+  optimizer: Adam
+  lr: 0
+  image_size: 28
+  hidden_n: 256
+  output_n: ${dataset.classes}
+dataset:
+  path: /dataset/MNIST
+  classes: 10
+trainer:
+  max_epochs: ${hparams.max_epochs}
+  min_epochs: ${hparams.min_epochs}
+  auto_scale_batch_size: false
+  gpus: 1
+  auto_select_gpus: true
+  num_nodes: 1
+  accelerator: null
+  benchmark: true
+  deterministic: true
+  fast_dev_run: ${debug}
+  profiler: simple
+  weights_summary: full
+model_checkpoint:
+  filepath: null
+  monitor: valid_loss
+  verbose: false
+  save_last: null
+  save_top_k: null
+  save_weights_only: false
+  mode: min
+  prefix: ''
+  dirpath: null
+  filename: null
+early_stopping:
+  monitor: valid_loss
+  min_delta: 0
+  patience: ${hparams.patience}
+  verbose: false
+  mode: min
+callbacks: []
+loggers:
+- _target_: pytorch_lightning.loggers.TensorBoardLogger
+  save_dir: .
+  name: ''
+  version: lightning_logs
+- _target_: pytorch_lightning.loggers.MLFlowLogger
+  experiment_name: ${experiment_name}
+  tracking_uri: file:/workspace/mlruns
+  tags: null
+  save_dir: null
+
+[2020-10-30 13:50:03,946][lightning][INFO] - GPU available: True, used: True
+[2020-10-30 13:50:03,946][lightning][INFO] - TPU available: False, using: 0 TPU cores
+[2020-10-30 13:50:03,946][lightning][INFO] - LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2020-10-30 13:50:03,979][lightning][INFO] - 
+  | Name     | Type     | Params
+--------------------------------------
+0 | flatten  | Flatten  | 0     
+1 | linear_1 | Linear   | 200 K 
+2 | linear_2 | Linear   | 65 K  
+3 | linear_3 | Linear   | 2 K   
+4 | accuracy | Accuracy | 0     
+[2020-10-30 13:50:05,950][lightning][INFO] - 
+
+Profiler Report
+
+Action              	|  Mean duration (s)	|  Total time (s) 
+-----------------------------------------------------------------
+on_fit_start        	|  1.5038e-05     	|  1.5038e-05     
+on_validation_start 	|  1.2739e-05     	|  2.5478e-05     
+on_validation_epoch_start	|  9.4525e-06     	|  1.8905e-05     
+on_validation_batch_start	|  3.1336e-05     	|  0.00021935     
+validation_step_end 	|  1.6371e-05     	|  0.00011459     
+on_validation_batch_end	|  1.4164e-05     	|  9.9145e-05     
+on_validation_epoch_end	|  1.5709e-05     	|  3.1419e-05     
+on_validation_end   	|  1.5354e-05     	|  3.0707e-05     
+on_train_start      	|  1.3666e-05     	|  1.3666e-05     
+on_epoch_start      	|  1.0203e-05     	|  2.0407e-05     
+on_train_epoch_start	|  7.7695e-06     	|  1.5539e-05     
+get_train_batch     	|  0.0096299      	|  0.91484        
+on_batch_start      	|  3.6656e-05     	|  0.0034824      
+on_train_batch_start	|  1.2545e-05     	|  0.0011918      
+training_step_end   	|  1.1805e-05     	|  0.0011214      
+model_forward       	|  0.0014763      	|  0.14025        
+model_backward      	|  0.00059825     	|  0.056834       
+on_after_backward   	|  1.0577e-05     	|  0.0010048      
+optimizer_step      	|  0.002929       	|  0.27825        
+on_batch_end        	|  1.7151e-05     	|  0.0016293      
+on_train_batch_end  	|  4.874e-05      	|  0.0046303      
+on_epoch_end        	|  1.6065e-05     	|  3.213e-05      
+on_train_epoch_end  	|  1.0775e-05     	|  2.155e-05      
+on_train_end        	|  2.7712e-05     	|  2.7712e-05     
+
+[2020-10-30 13:50:05,953][lightning][INFO] - LR finder stopped early due to diverging loss.
+[2020-10-30 13:50:05,956][lightning][INFO] - Learning rate set to 0.002754228703338169
+[2020-10-30 13:50:05,974][lightning][INFO] - 
+  | Name     | Type     | Params
+--------------------------------------
+0 | flatten  | Flatten  | 0     
+1 | linear_1 | Linear   | 200 K 
+2 | linear_2 | Linear   | 65 K  
+3 | linear_3 | Linear   | 2 K   
+4 | accuracy | Accuracy | 0     
